@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Tetris</title>
+    <link href="tetris.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <canvas id="game"></canvas>
+    <script src="tetris.js"></script>
+    
+<audio id="music" loop>
+  <source src="Original Tetris theme (Tetris Soundtrack).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const music = document.getElementById("music");
+
+  function startMusic(event) {
+    const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+    if (keys.includes(event.key)) {
+      music.play();
+      document.removeEventListener("keydown", startMusic);
+    }
+  }
+
+  document.addEventListener("keydown", startMusic);
+</script>
+
+  </body>
+</html>
