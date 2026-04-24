@@ -1,11 +1,11 @@
-//board
+
 var blockSize = 25;
 var rows = 20;
 var cols = 20;
 var board;
 var context; 
 
-//snake head
+
 var snakeX = blockSize * 5;
 var snakeY = blockSize * 5;
 
@@ -14,11 +14,11 @@ var velocityY = 0;
 
 var snakeBody = [];
 
-//food
+
 var foodX;
 var foodY;
 
-//score
+
 var score = 0;
 
 var gameOver = false;
@@ -42,18 +42,15 @@ function update() {
     context.fillStyle = "black";
     context.fillRect(0, 0, board.width, board.height);
 
-    // food
     context.fillStyle = "red";
     context.fillRect(foodX, foodY, blockSize, blockSize);
 
-    // eat food
     if (snakeX == foodX && snakeY == foodY) {
         snakeBody.push([foodX, foodY]);
         placeFood();
-        score++; // increase score
+        score++; 
     }
 
-    // move body
     for (let i = snakeBody.length-1; i > 0; i--) {
         snakeBody[i] = snakeBody[i-1];
     }
@@ -61,24 +58,20 @@ function update() {
         snakeBody[0] = [snakeX, snakeY];
     }
 
-    // move head
     context.fillStyle = "lime";
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
 
-    // draw body
     for (let i = 0; i < snakeBody.length; i++) {
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
-    // game over (walls)
     if (snakeX < 0 || snakeX >= cols*blockSize || snakeY < 0 || snakeY >= rows*blockSize) {
         gameOver = true;
         alert("Game Over! Score: " + score);
     }
 
-    // game over (self collision)
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
@@ -86,7 +79,6 @@ function update() {
         }
     }
 
-    // draw score
     context.fillStyle = "white";
     context.font = "20px Arial";
     context.fillText("Score: " + score, 10, 20);
